@@ -1,57 +1,75 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
+const theme = createTheme();
 
 export class FormUserDetails extends Component {
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
   };
+
   render() {
     const { values, handleChange } = this.props;
+
     return (
-      <MuiThemeProvider>
+      <ThemeProvider theme={theme}>
         <React.Fragment>
-          <AppBar title="Enter User Details" />
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6">Enter User Details</Typography>
+            </Toolbar>
+          </AppBar>
           <TextField
-            hintText="Enter your First Name"
-            floatingLabelText="First Name"
+            label="First Name"
+            placeholder="Enter your First Name"
             onChange={handleChange("firstName")}
-            defaultValue={values.firstName}
+            value={values.firstName}
+            fullWidth
+            margin="normal"
           />
           <br />
           <TextField
-            hintText="Enter your Last Name"
-            floatingLabelText="Last Name"
+            label="Last Name"
+            placeholder="Enter your Last Name"
             onChange={handleChange("lastName")}
-            defaultValue={values.lastName}
+            value={values.lastName}
+            fullWidth
+            margin="normal"
           />
           <br />
           <TextField
-            hintText="Enter your Email"
-            floatingLabelText="Email"
+            label="Email"
+            placeholder="Enter your Email"
             onChange={handleChange("email")}
-            defaultValue={values.email}
+            value={values.email}
+            fullWidth
+            margin="normal"
           />
-          <br/>
-          <RaisedButton 
-            label="Continue"
-            primary={true}
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
             style={styles.button}
             onClick={this.continue}
-            />
+          >
+            Continue
+          </Button>
         </React.Fragment>
-      </MuiThemeProvider>
+      </ThemeProvider>
     );
   }
 }
 
-const styles ={
-    button: {
-       margin: 15 
-    }
-}
+const styles = {
+  button: {
+    margin: 15,
+  },
+};
 
 export default FormUserDetails;
